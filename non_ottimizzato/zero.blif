@@ -1,0 +1,9 @@
+# Costante 0
+
+.model ZERO
+.outputs out
+
+.names out
+0
+
+.end

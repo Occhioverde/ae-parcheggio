@@ -1,0 +1,14 @@
+# One-hot multiplexer con 3 ingressi da 5 bit
+
+.model OHMUX3-5
+.inputs x2 x1 x0 a4 a3 a2 a1 a0 b4 b3 b2 b1 b0 c4 c3 c2 c1 c0
+.outputs o4 o3 o2 o1 o0
+
+.subckt OHMUX3 s2=x2 s1=x1 s0=x0 i2=a4 i1=b4 i0=c4 o0=o4
+.subckt OHMUX3 s2=x2 s1=x1 s0=x0 i2=a3 i1=b3 i0=c3 o0=o3
+.subckt OHMUX3 s2=x2 s1=x1 s0=x0 i2=a2 i1=b2 i0=c2 o0=o2
+.subckt OHMUX3 s2=x2 s1=x1 s0=x0 i2=a1 i1=b1 i0=c1 o0=o1
+.subckt OHMUX3 s2=x2 s1=x1 s0=x0 i2=a0 i1=b0 i0=c0 o0=o0
+
+.search ohmux3.blif
+.end

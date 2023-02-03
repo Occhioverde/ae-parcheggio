@@ -1,0 +1,12 @@
+# One-hot multiplexer con 3 ingressi da un bit
+
+.model OHMUX3
+.inputs s2 s1 s0 i2 i1 i0
+.outputs o0
+
+.names s2 s1 s0 i2 i1 i0 o0
+1001-- 1
+010-1- 1
+001--1 1
+
+.end

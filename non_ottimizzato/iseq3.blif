@@ -1,0 +1,13 @@
+.model ISEQ3
+.inputs a2 a1 a0 b2 b1 b0
+.outputs eq
+
+.subckt xnor a=a2 b=b2 out=x2
+.subckt xnor a=a1 b=b1 out=x1
+.subckt xnor a=a0 b=b0 out=x0
+
+.names x2 x1 x0 eq
+111 1
+
+.search xnor.blif
+.end

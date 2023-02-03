@@ -1,0 +1,12 @@
+.model REGISTRO5
+.inputs a4 a3 a2 a1 a0
+.outputs o4 o3 o2 o1 o0
+
+.subckt REGISTRO a=a4 o=o4
+.subckt REGISTRO a=a3 o=o3
+.subckt REGISTRO a=a2 o=o2
+.subckt REGISTRO a=a1 o=o1
+.subckt REGISTRO a=a0 o=o0
+
+.search registro.blif
+.end

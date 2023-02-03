@@ -1,0 +1,19 @@
+# Sottrattore binario con riporto
+
+.model DIF
+.inputs a b bin
+.outputs o bout
+
+.names a b bin o
+001 1
+010 1
+100 1
+111 1
+
+.names a b bin bout
+001 1
+010 1
+011 1
+111 1
+
+.end

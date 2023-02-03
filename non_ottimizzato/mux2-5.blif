@@ -1,0 +1,14 @@
+# Multiplexer con 2 ingressi da 5 bit
+
+.model MUX2-5
+.inputs x0 a4 a3 a2 a1 a0 b4 b3 b2 b1 b0
+.outputs o4 o3 o2 o1 o0
+
+.subckt MUX2 s0=x0 i1=a4 i0=b4 o0=o4
+.subckt MUX2 s0=x0 i1=a3 i0=b3 o0=o3
+.subckt MUX2 s0=x0 i1=a2 i0=b2 o0=o2
+.subckt MUX2 s0=x0 i1=a1 i0=b1 o0=o1
+.subckt MUX2 s0=x0 i1=a0 i0=b0 o0=o0
+
+.search mux2.blif
+.end
