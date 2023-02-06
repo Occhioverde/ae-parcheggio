@@ -1,0 +1,122 @@
+.model CONTROLLER
+.inputs act1 act0 sec2 sec1 sec0
+.outputs wa wb wc openparks showfull invsec
+.latch    [731] LatchOut_v5   1
+.latch    [732] LatchOut_v6   1
+.latch    [733] LatchOut_v7   0
+.start_kiss
+.i 5
+.o 6
+.p 19
+.s 5
+.r OFF
+0---- OFF OFF 000000
+-0--- OFF OFF 000000
+--0-- OFF OFF 000000
+---0- OFF OFF 000000
+----0 OFF OFF 000000
+11111 OFF READA 000000
+----- READA READB 100000
+----- READB READC 010000
+----- READC RDY 001010
+--100 RDY RDY 000110
+--010 RDY RDY 000110
+--001 RDY RDY 000110
+1-000 RDY RDY 000111
+-1000 RDY RDY 000111
+--011 RDY RDY 000111
+--101 RDY RDY 000111
+--110 RDY RDY 000111
+--111 RDY RDY 000111
+00000 RDY OFF 000000
+.end_kiss
+.latch_order LatchOut_v5 LatchOut_v6 LatchOut_v7
+.code OFF 110
+.code READA 010
+.code READB 001
+.code READC 100
+.code RDY 111
+.names act1 act0 sec2 sec1 sec0 LatchOut_v5 LatchOut_v6 LatchOut_v7 [731]
+0----1-- 1
+-0---1-- 1
+--0--1-- 1
+---0-1-- 1
+----01-- 1
+-----0-1 1
+------00 1
+----1-11 1
+.names LatchOut_v5 [732]
+1 1
+.names act1 act0 sec2 sec1 sec0 LatchOut_v5 LatchOut_v6 LatchOut_v7 [733]
+-----0-0 1
+------00 1
+--1---11 1
+---1--11 1
+----1-11 1
+1-000-11 1
+-1000-11 1
+.names LatchOut_v5 LatchOut_v7 wa
+00 1
+.names LatchOut_v5 LatchOut_v7 wb
+01 1
+.names LatchOut_v6 LatchOut_v7 wc
+00 1
+.names act1 act0 sec2 sec1 sec0 LatchOut_v6 LatchOut_v7 openparks
+--1--11 1
+---1-11 1
+----111 1
+1-00011 1
+-100011 1
+.names act1 act0 sec2 sec1 sec0 LatchOut_v6 LatchOut_v7 showfull
+-----00 1
+--1--11 1
+---1-11 1
+----111 1
+1-00011 1
+-100011 1
+.names act1 act0 sec2 sec1 sec0 LatchOut_v6 LatchOut_v7 invsec
+--11-11 1
+--1-111 1
+---1111 1
+1-00011 1
+-100011 1
+.exdc 
+.inputs act1 act0 sec2 sec1 sec0 LatchOut_v5 LatchOut_v6 LatchOut_v7
+.outputs [731] [732] [733] wa wb wc openparks showfull invsec
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [731]
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [732]
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [733]
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 wa
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 wb
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 wc
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 openparks
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 showfull
+011 1
+101 1
+000 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 invsec
+011 1
+101 1
+000 1
+.end

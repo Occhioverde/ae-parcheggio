@@ -1,0 +1,45 @@
+# Controller del circuito
+.model CONTROLLER
+.inputs act1 act0 sec2 sec1 sec0
+.outputs wa wb wc openparks showfull invsec
+
+.start_kiss
+.i 5
+.o 6
+.s 5
+.p 19
+.r OFF
+
+# OFF
+0---- OFF OFF   000000
+-0--- OFF OFF   000000
+--0-- OFF OFF   000000
+---0- OFF OFF   000000
+----0 OFF OFF   000000
+11111 OFF READA 000000
+
+# READA
+----- READA READB 100000
+
+# READB
+----- READB READC 010000
+
+# READC
+----- READC RDY 001010
+
+# RDY
+# Nessun errore
+--100 RDY RDY 000110
+--010 RDY RDY 000110
+--001 RDY RDY 000110
+# Con errore
+1-000 RDY RDY 000111
+-1000 RDY RDY 000111
+--011 RDY RDY 000111
+--101 RDY RDY 000111
+--110 RDY RDY 000111
+--111 RDY RDY 000111
+# Poweroff
+00000 RDY OFF 000000
+
+.end_kiss

@@ -1,1 +1,96 @@
-# File principale
+# Sistema di gestione delle sbarre di un parcheggio come da consegna
+
+.model FSMD
+.inputs act1 act0 sec2 sec1 sec0
+.outputs invsec sin sout fulla fullb fullc
+
+# Import delle costanti utili
+.subckt ZERO out=zero
+.subckt ONE out=one
+
+# FSM che funge da controller per il sistema
+.subckt CONTROLLER act1=act1 act0=act0 sec2=sec2 sec1=sec1 sec0=sec0 wa=wa wb=wb wc=wc openparks=openparks showfull=showfull invsec=invsec
+
+# Logica di caricamento del registro A
+.subckt MUX2-5 x0=wa a4=fbcka4 a3=fbcka3 a2=fbcka2 a1=fbcka1 a0=fbcka0 b4=act1 b3=act0 b2=sec2 b1=sec1 b0=sec0 o4=aregin4 o3=aregin3 o2=aregin2 o1=aregin1 o0=aregin0
+.subckt REGISTRO5 a4=aregin4 a3=aregin3 a2=aregin2 a1=aregin1 a0=aregin0 o4=acount4 o3=acount3 o2=acount2 o1=acount1 o0=acount0
+
+# Logica di caricamento del registro B
+.subckt MUX2-5 x0=wb a4=fbckb4 a3=fbckb3 a2=fbckb2 a1=fbckb1 a0=fbckb0 b4=act1 b3=act0 b2=sec2 b1=sec1 b0=sec0 o4=bregin4 o3=bregin3 o2=bregin2 o1=bregin1 o0=bregin0
+.subckt REGISTRO5 a4=bregin4 a3=bregin3 a2=bregin2 a1=bregin1 a0=bregin0 o4=bcount4 o3=bcount3 o2=bcount2 o1=bcount1 o0=bcount0
+
+# Logica di caricamento del registro C
+.subckt LE5 a4=act1 a3=act0 a2=sec2 a1=sec1 a0=sec0 b4=one b3=zero b2=one b1=one b0=one le=cmaxnotreached
+.subckt MUX2-5 x0=cmaxnotreached a4=one a3=one a2=zero a1=zero a0=zero b4=act1 b3=act0 b2=sec2 b1=sec1 b0=sec0 o4=ldinc4 o3=ldinc3 o2=ldinc2 o1=ldinc1 o0=ldinc0
+.subckt MUX2-5 x0=wc a4=fbckc4 a3=fbckc3 a2=fbckc2 a1=fbckc1 a0=fbckc0 b4=ldinc4 b3=ldinc3 b2=ldinc2 b1=ldinc1 b0=ldinc0 o4=cregin4 o3=cregin3 o2=cregin2 o1=cregin1 o0=cregin0
+.subckt REGISTRO5 a4=cregin4 a3=cregin3 a2=cregin2 a1=cregin1 a0=cregin0 o4=ccount4 o3=ccount3 o2=ccount2 o1=ccount1 o0=ccount0
+
+# Logica di feedback loop nel registro A
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=one b1=zero b0=zero eq=updta
+.subckt MUX2-5 x0=updta a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbcka4 o3=fbcka3 o2=fbcka2 o1=fbcka1 o0=fbcka0
+
+# Logica di feedback loop nel registro B
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=one b0=zero eq=updtb
+.subckt MUX2-5 x0=updtb a4=bcount4 a3=bcount3 a2=bcount2 a1=bcount1 a0=bcount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbckb4 o3=fbckb3 o2=fbckb2 o1=fbckb1 o0=fbckb0
+
+# Logica di feedback loop nel registro C
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=zero b0=one eq=updtc
+.subckt MUX2-5 x0=updtc a4=ccount4 a3=ccount3 a2=ccount2 a1=ccount1 a0=ccount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbckc4 o3=fbckc3 o2=fbckc2 o1=fbckc1 o0=fbckc0
+
+# Logica di controllo dei parcheggi pieni
+.subckt ISEQ5 a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=one b3=one b2=one b1=one b0=one eq=maxpostia
+.subckt ISEQ5 a4=bcount4 a3=bcount3 a2=bcount2 a1=bcount1 a0=bcount0 b4=one b3=one b2=one b1=one b0=one eq=maxpostib
+.subckt ISEQ5 a4=ccount4 a3=ccount3 a2=ccount2 a1=ccount1 a0=ccount0 b4=one b3=one b2=zero b1=zero b0=zero eq=maxpostic
+
+# Controllo di passaggio dei dati da elaborare (don't care se il settore non è valido)
+.subckt OHMUX3-5 x2=sec2 x1=sec1 x0=sec0 a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=bcount4 b3=bcount3 b2=bcount2 b1=bcount1 b0=bcount0 c4=ccount4 c3=ccount3 c2=ccount2 c1=ccount1 c0=ccount0 o4=elabcount4 o3=elabcount3 o2=elabcount2 o1=elabcount1 o0=elabcount0
+
+# Logica d'incremento del conteggio
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=zero b0=one eq=workingwc
+.subckt MUX2-5 x0=workingwc a4=one a3=one a2=one a1=one a0=zero b4=one b3=zero b2=one b1=one b0=one o4=maxcount4 o3=maxcount3 o2=maxcount2 o1=maxcount1 o0=maxcount0
+.subckt LE5 a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=maxcount4 b3=maxcount3 b2=maxcount2 b1=maxcount1 b0=maxcount0 le=notreachedmax
+.subckt SUM5 a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=zero b3=zero b2=zero b1=zero b0=one cin=zero o4=incrcount4 o3=incrcount3 o2=incrcount2 o1=incrcount1 o0=incrcount0
+.subckt MUX2-5 x0=notreachedmax a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=incrcount4 b3=incrcount3 b2=incrcount2 b1=incrcount1 b0=incrcount0 o4=incrres4 o3=incrres3 o2=incrres2 o1=incrres1 o0=incrres0
+
+# Logica di decremento del conteggio
+.subckt GT5 a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=zero b3=zero b2=zero b1=zero b0=zero gt=notreachedmin
+.subckt DIF5 a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=zero b3=zero b2=zero b1=zero b0=one bin=zero o4=decrcount4 o3=decrcount3 o2=decrcount2 o1=decrcount1 o0=decrcount0
+.subckt MUX2-5 x0=notreachedmin a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=decrcount4 b3=decrcount3 b2=decrcount2 b1=decrcount1 b0=decrcount0 o4=decrres4 o3=decrres3 o2=decrres2 o1=decrres1 o0=decrres0
+
+# Scelta del valore di feedback
+.subckt MUX4-5 x1=act1 x0=act0 a4=elabcount4 a3=elabcount3 a2=elabcount2 a1=elabcount1 a0=elabcount0 b4=incrres4 b3=incrres3 b2=incrres2 b1=incrres1 b0=incrres0 c4=decrres4 c3=decrres3 c2=decrres2 c1=decrres1 c0=decrres0 d4=elabcount4 d3=elabcount3 d2=elabcount2 d1=elabcount1 d0=elabcount0 o4=newcount4 o3=newcount3 o2=newcount2 o1=newcount1 o0=newcount0
+
+# Scelta sbarra da aprire
+.subckt ISEQ2 a1=act1 a0=act0 b1=zero b0=one eq=openin
+.subckt ISEQ2 a1=act1 a0=act0 b1=one b0=zero eq=openout
+
+# Comando alla sbarra
+.names openin notreachedmax openparks invsec sin
+1110 1
+.names openout notreachedmin openparks invsec sout
+1110 1
+
+# Comandi agli indicatori
+.names showfull maxpostia fulla
+11 1
+.names showfull maxpostib fullb
+11 1
+.names showfull maxpostic fullc
+11 1
+
+# Lista dei sorgenti BLIF utilizzati
+.search zero.blif
+.search one.blif
+.search controller-net.blif
+.search mux2-5.blif
+.search registro5.blif
+.search le5.blif
+.search iseq3.blif
+.search iseq5.blif
+.search ohmux3-5.blif
+.search sum5.blif
+.search gt5.blif
+.search dif5.blif
+.search mux4-5.blif
+.search iseq2.blif
+.end
