@@ -9,7 +9,7 @@
 .subckt ONE out=one
 
 # FSM che funge da controller per il sistema
-.subckt CONTROLLER act1=act1 act0=act0 sec2=sec2 sec1=sec1 sec0=sec0 wa=wa wb=wb wc=wc openparks=openparks showfull=showfull invsec=invsec
+.subckt CONTROLLER act1=act1 act0=act0 sec2=sec2 sec1=sec1 sec0=sec0 wa=wa wb=wb wc=wc openparks=openparks showfulla=showfulla showfullb=showfullb showfullc=showfullc invsec=invsec
 
 # Logica di caricamento del registro A
 .subckt MUX2-5 x0=wa a4=fbcka4 a3=fbcka3 a2=fbcka2 a1=fbcka1 a0=fbcka0 b4=act1 b3=act0 b2=sec2 b1=sec1 b0=sec0 o4=aregin4 o3=aregin3 o2=aregin2 o1=aregin1 o0=aregin0
@@ -38,9 +38,9 @@
 .subckt MUX2-5 x0=updtc a4=ccount4 a3=ccount3 a2=ccount2 a1=ccount1 a0=ccount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbckc4 o3=fbckc3 o2=fbckc2 o1=fbckc1 o0=fbckc0
 
 # Logica di controllo dei parcheggi pieni
-.subckt ISEQ5 a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=one b3=one b2=one b1=one b0=one eq=maxpostia
-.subckt ISEQ5 a4=bcount4 a3=bcount3 a2=bcount2 a1=bcount1 a0=bcount0 b4=one b3=one b2=one b1=one b0=one eq=maxpostib
-.subckt ISEQ5 a4=ccount4 a3=ccount3 a2=ccount2 a1=ccount1 a0=ccount0 b4=one b3=one b2=zero b1=zero b0=zero eq=maxpostic
+.subckt ISEQ5 a4=aregin4 a3=aregin3 a2=aregin2 a1=aregin1 a0=aregin0 b4=one b3=one b2=one b1=one b0=one eq=maxpostia
+.subckt ISEQ5 a4=bregin4 a3=bregin3 a2=bregin2 a1=bregin1 a0=bregin0 b4=one b3=one b2=one b1=one b0=one eq=maxpostib
+.subckt ISEQ5 a4=cregin4 a3=cregin3 a2=cregin2 a1=cregin1 a0=cregin0 b4=one b3=one b2=zero b1=zero b0=zero eq=maxpostic
 
 # Controllo di passaggio dei dati da elaborare (don't care se il settore non è valido)
 .subckt OHMUX3-5 x2=sec2 x1=sec1 x0=sec0 a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=bcount4 b3=bcount3 b2=bcount2 b1=bcount1 b0=bcount0 c4=ccount4 c3=ccount3 c2=ccount2 c1=ccount1 c0=ccount0 o4=elabcount4 o3=elabcount3 o2=elabcount2 o1=elabcount1 o0=elabcount0
@@ -71,11 +71,11 @@
 1110 1
 
 # Comandi agli indicatori
-.names showfull maxpostia fulla
+.names showfulla maxpostia fulla
 11 1
-.names showfull maxpostib fullb
+.names showfullb maxpostib fullb
 11 1
-.names showfull maxpostic fullc
+.names showfullc maxpostic fullc
 11 1
 
 # Lista dei sorgenti BLIF utilizzati
