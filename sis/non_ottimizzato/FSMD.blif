@@ -26,15 +26,21 @@
 .subckt REGISTRO5 a4=cregin4 a3=cregin3 a2=cregin2 a1=cregin1 a0=cregin0 o4=ccount4 o3=ccount3 o2=ccount2 o1=ccount1 o0=ccount0
 
 # Logica di feedback loop nel registro A
-.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=one b1=zero b0=zero eq=updta
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=one b1=zero b0=zero eq=wantupdta
+.names wantupdta openparks updta
+11 1
 .subckt MUX2-5 x0=updta a4=acount4 a3=acount3 a2=acount2 a1=acount1 a0=acount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbcka4 o3=fbcka3 o2=fbcka2 o1=fbcka1 o0=fbcka0
 
 # Logica di feedback loop nel registro B
-.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=one b0=zero eq=updtb
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=one b0=zero eq=wantupdtb
+.names wantupdtb openparks updtb
+11 1
 .subckt MUX2-5 x0=updtb a4=bcount4 a3=bcount3 a2=bcount2 a1=bcount1 a0=bcount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbckb4 o3=fbckb3 o2=fbckb2 o1=fbckb1 o0=fbckb0
 
 # Logica di feedback loop nel registro C
-.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=zero b0=one eq=updtc
+.subckt ISEQ3 a2=sec2 a1=sec1 a0=sec0 b2=zero b1=zero b0=one eq=wantupdtc
+.names wantupdtc openparks updtc
+11 1
 .subckt MUX2-5 x0=updtc a4=ccount4 a3=ccount3 a2=ccount2 a1=ccount1 a0=ccount0 b4=newcount4 b3=newcount3 b2=newcount2 b1=newcount1 b0=newcount0 o4=fbckc4 o3=fbckc3 o2=fbckc2 o1=fbckc1 o0=fbckc0
 
 # Logica di controllo dei parcheggi pieni
