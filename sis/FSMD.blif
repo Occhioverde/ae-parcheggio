@@ -1,0 +1,218 @@
+.model FSMD
+.inputs act1 act0 sec2 sec1 sec0
+.outputs invsec sin sout fulla fullb fullc
+.latch    aregin4 acount4 re NIL 0
+.latch    aregin3 acount3 re NIL 0
+.latch    aregin2 acount2 re NIL 0
+.latch    aregin1 acount1 re NIL 0
+.latch    aregin0 acount0 re NIL 0
+.latch    bregin4 bcount4 re NIL 0
+.latch    bregin3 bcount3 re NIL 0
+.latch    bregin2 bcount2 re NIL 0
+.latch    bregin1 bcount1 re NIL 0
+.latch    bregin0 bcount0 re NIL 0
+.latch    cregin4 ccount4 re NIL 0
+.latch    cregin3 ccount3 re NIL 0
+.latch    cregin2 ccount2 re NIL 0
+.latch    cregin1 ccount1 re NIL 0
+.latch    cregin0 ccount0 re NIL 0
+.latch    [30] LatchOut_v5   1
+.latch    LatchOut_v5 LatchOut_v6   1
+.latch    [32] LatchOut_v7   0
+.names openparks workingwc [11528] [11529] invsec
+1000 1
+.names act1 act0 invsec openparks [11548] sin
+01011 1
+.names act0 openparks [11530] sout
+010 1
+.names aregin4 aregin3 aregin2 aregin1 aregin0 LatchOut_v5 [32] fulla
+111110- 1
+11111-1 1
+.names wb bregin4 bregin3 bregin2 bregin1 bregin0 [30] [32] fullb
+111111-- 1
+-1111111 1
+.names cregin4 cregin3 cregin2 cregin1 cregin0 [11563] fullc
+110001 1
+.names LatchOut_v5 LatchOut_v7 wb
+01 1
+.names act1 act0 sec0 [11568] [11573] openparks
+1--1- 1
+-1-1- 1
+--11- 1
+---11 1
+.names act1 acount4 newcount4 [11535] [11562] [11564] aregin4
+-1-1-- 1
+1---0- 1
+--1--0 1
+.names act0 acount3 newcount3 [11535] [11562] [11564] aregin3
+-1-1-- 1
+1---0- 1
+--1--0 1
+.names sec2 acount2 newcount2 [11535] [11562] [11564] aregin2
+-1-1-- 1
+1---0- 1
+--1--0 1
+.names sec1 acount1 newcount1 [11535] [11562] [11564] aregin1
+-1-1-- 1
+1---0- 1
+--1--0 1
+.names sec0 acount0 newcount0 [11535] [11562] [11564] aregin0
+-1-1-- 1
+1---0- 1
+--1--0 1
+.names act1 wb bcount4 newcount4 [11534] [11571] bregin4
+11---- 1
+---11- 1
+--1--1 1
+.names act0 wb bcount3 newcount3 [11534] [11571] bregin3
+11---- 1
+---11- 1
+--1--1 1
+.names sec2 wb bcount2 newcount2 [11534] [11571] bregin2
+11---- 1
+---11- 1
+--1--1 1
+.names sec1 wb bcount1 newcount1 [11534] [11571] bregin1
+11---- 1
+---11- 1
+--1--1 1
+.names sec0 wb bcount0 newcount0 [11534] [11571] bregin0
+11---- 1
+---11- 1
+--1--1 1
+.names act1 ccount4 newcount4 [11536] [11561] [11570] cregin4
+-1-1-- 1
+1---0- 1
+--1--1 1
+.names act0 ccount3 newcount3 [11536] [11561] [11570] cregin3
+-1-1-- 1
+1---0- 1
+--1--1 1
+.names sec2 ccount2 newcount2 [11536] [11570] [11575] cregin2
+-1-1-- 1
+--1-1- 1
+1----1 1
+.names sec1 ccount1 newcount1 [11536] [11570] [11575] cregin1
+-1-1-- 1
+--1-1- 1
+1----1 1
+.names sec0 ccount0 newcount0 [11536] [11570] [11575] cregin0
+-1-1-- 1
+--1-1- 1
+1----1 1
+.names newcount3 elabcount4 elabcount3 [11572] newcount4
+01-- 1
+-11- 1
+-1-0 1
+0-10 1
+.names newcount1 elabcount3 elabcount2 elabcount1 [11556] newcount3
+-1--1 1
+-110- 1
+00--0 1
+-00-0 1
+.names newcount1 elabcount2 elabcount1 elabcount0 [11556] newcount2
+-1--1 1
+-0--0 1
+0-111 1
+.names newcount0 elabcount1 elabcount0 [11569] newcount1
+-1-1 1
+010- 1
+10-0 1
+-010 1
+.names act1 act0 elabcount0 [11530] [11548] [11560] newcount0
+--1--0 1
+-011-- 1
+-11-0- 1
+--00-1 1
+010-1- 1
+.names acount4 bcount4 ccount4 workingwc [11528] [11529] elabcount4
+--11-- 1
+1---1- 1
+-1---1 1
+.names acount3 bcount3 ccount3 workingwc [11528] [11529] elabcount3
+--11-- 1
+1---1- 1
+-1---1 1
+.names acount2 bcount2 ccount2 workingwc [11528] [11529] elabcount2
+--11-- 1
+1---1- 1
+-1---1 1
+.names acount1 bcount1 ccount1 workingwc [11528] [11529] elabcount1
+--11-- 1
+1---1- 1
+-1---1 1
+.names acount0 bcount0 ccount0 workingwc [11528] [11529] elabcount0
+--11-- 1
+1---1- 1
+-1---1 1
+.names sec0 [11573] workingwc
+10 1
+.names sec2 sec1 sec0 wb LatchOut_v5 [11560] [11561] [11568] [30]
+---1---- 1
+------0- 1
+-------1 1
+0---1--- 1
+-0--1--- 1
+--0-1--- 1
+----11-- 1
+.names [11562] [11563] [32]
+0- 1
+-1 1
+.names sec2 sec1 sec0 [11528]
+100 1
+.names sec2 sec1 sec0 [11529]
+010 1
+.names act1 elabcount4 elabcount3 elabcount2 elabcount1 elabcount0 [11530]
+0----- 1
+-00000 1
+.names wb openparks [11529] [11534]
+011 1
+.names [11562] [11564] [11535]
+11 1
+.names workingwc [11561] [11563] [11536]
+--0 1
+01- 1
+.names elabcount4 elabcount3 workingwc [11572] [11548]
+0--- 1
+-0-- 1
+--01 1
+.names newcount0 elabcount1 elabcount0 [11567] [11569] [11556]
+----1 1
+-10-- 1
+0--1- 1
+.names act1 act0 [11560]
+0- 1
+-0 1
+.names LatchOut_v7 LatchOut_v6 [11561]
+1- 1
+-1 1
+.names LatchOut_v5 LatchOut_v7 [11562]
+1- 1
+-1 1
+.names openparks [11561] [11563]
+1- 1
+-0 1
+.names openparks [11528] [11564]
+0- 1
+-0 1
+.names elabcount2 elabcount1 [11567]
+0- 1
+-0 1
+.names LatchOut_v7 LatchOut_v6 [11568]
+11 1
+.names act0 newcount0 elabcount0 [11569]
+11- 1
+0-1 1
+.names openparks workingwc [11570]
+11 1
+.names wb [11534] [11571]
+00 1
+.names elabcount0 [11567] [11572]
+0- 1
+-1 1
+.names sec2 sec1 [11573]
+1- 1
+-1 1
+.names [11560] [11561] [11575]
+10 1
+.end
